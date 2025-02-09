@@ -1,0 +1,10 @@
+.github
+data
+.vscode
+*.bak
+*.dat
+*.dir
+*.sql
+*.gz
+*.ipynb
+venv/

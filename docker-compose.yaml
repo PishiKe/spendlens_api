@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    container_name: spendlens-db
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=spendlens
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - HOST=localhost
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+    networks:
+      - spendlens
+
+  api:
+    container_name: spendlens-api
+    command: bash -c "source /root/.bashrc && python ./manage.py migrate && python ./manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - /opt/spendlens/:/opt/spendlens
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+    restart: unless-stopped
+    networks:
+      - spendlens
+
+networks:
+  spendlens:
+    name: spendlens
+    driver: bridge

@@ -18,6 +18,7 @@ services:
       - spendlens
 
   api:
+    image: pishinzuki/spendlens-api
     container_name: spendlens-api
     command: bash -c "source /root/.bashrc && python ./manage.py migrate && python ./manage.py runserver 0.0.0.0:8000"
     volumes:

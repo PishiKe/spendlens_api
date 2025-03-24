@@ -14,6 +14,7 @@ class Expense(models.Model):
   class Meta:
     verbose_name = 'Expense'
     verbose_name_plural = 'Expenses'
+    ordering = ['-date']
 
   def __str__(self):
     return self.description

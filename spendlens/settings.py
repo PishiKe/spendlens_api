@@ -30,9 +30,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-	env('ALLOWED_HOST')
-]
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
@@ -48,6 +46,7 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     'allauth',
     'allauth.socialaccount',
+    'corsheaders',
     #local
     'spendlens.expenses',
     'spendlens.users',
@@ -72,6 +71,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'spendlens.urls'

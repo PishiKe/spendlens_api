@@ -7,5 +7,6 @@ router = DefaultRouter()
 router.register('expense', views.ExpenseViewset, 'expense')
 
 urlpatterns = [
+    path('expense/monthly-total/', views.MonthlyExpenseView.as_view(), name='monthly-expense-total'),
 
 ] + router.urls

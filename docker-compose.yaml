@@ -33,6 +33,15 @@ services:
     networks:
       - spendlens
 
+portfolio:
+  image: pishinzuki/portfolio
+  container_name: portfolio
+  ports:
+    - 8080:80
+  restart: unless-stopped
+  networks:
+    - spendlens
+
 networks:
   spendlens:
     name: spendlens

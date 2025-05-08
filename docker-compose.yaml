@@ -18,7 +18,7 @@ services:
       - spendlens
 
   api:
-    image: pishinzuki/spendlens-api
+    image: pishinzuki/spendlens-api:dev
     container_name: spendlens-api
     command: bash -c "source /root/.bashrc && python ./manage.py migrate && python ./manage.py runserver 0.0.0.0:8000"
     volumes:
@@ -33,14 +33,30 @@ services:
     networks:
       - spendlens
 
-portfolio:
-  image: pishinzuki/portfolio
-  container_name: portfolio
-  ports:
-    - 8080:80
-  restart: unless-stopped
-  networks:
-    - spendlens
+  portfolio:
+    image: pishinzuki/portfolio:latest
+    container_name: portfolio
+    ports:
+      - 8080:80
+    restart: unless-stopped
+    networks:
+      - spendlens
+
+  nginx:
+    build:
+      context: ./nginx
+    container_name: nginx
+    volumes:
+      - /var/log/:/var/log
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - api
+      - portfolio
+    restart: unless-stopped
+    networks:
+      - spendlens
 
 networks:
   spendlens:

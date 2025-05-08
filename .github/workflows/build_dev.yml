@@ -39,6 +39,10 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
 
+      - name: Copy Docker Compose
+        run: |
+          scp -o StrictHostKeyChecking=no docker-compose.yml ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/opt/spendlens
+
       - name: SSH to server and run Docker Compose
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "cd /opt/spendlens && docker compose pull && docker compose up -d"

@@ -41,7 +41,7 @@ jobs:
 
       - name: Copy Docker Compose
         run: |
-          scp -o StrictHostKeyChecking=no docker-compose.yml ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/opt/spendlens
+          scp -o StrictHostKeyChecking=no ./docker-compose.yaml ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/opt/spendlens
 
       - name: SSH to server and run Docker Compose
         run: |

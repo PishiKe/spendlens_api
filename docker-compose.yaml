@@ -11,8 +11,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - HOST=localhost
-    ports:
-      - 5432:5432
+    # ports:
+    #   - 5432:5432
     restart: unless-stopped
     networks:
       - spendlens
